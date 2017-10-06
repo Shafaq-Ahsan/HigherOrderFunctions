@@ -1,0 +1,144 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title> Assignment </title>
+<script>
+ 
+    //remove
+    Array.prototype.remove1 = function(member) {
+  var index = this.indexOf(member);
+  if (index > -1) {
+    this.splice(index, 1);
+  }
+  return this;
+}
+console.log("remove function input index "+ ['pen', 'pencil', 'scale'])
+console.log("result after removing scale : "+['pen', 'pencil', 'scale'].remove1('scale'));
+
+   var numbers3 = [21, 20, 2, 3];
+    console.log("Input array : "+numbers3);
+
+    //map
+Array.prototype.map1 = function(callback) {
+    arr = [];
+    for (var i = 0; i < this.length; i++)
+        arr.push(callback(this[i], i, this));
+    return arr;
+};
+var squareRoot = numbers3.map1(function(num) {
+    return Math.sqrt(num);
+});
+console.log("map result :"+squareRoot);
+
+//filter
+Array.prototype.filter1 = function(callback, context) {
+    arr = [];
+    for (var i = 0; i < this.length; i++) {
+        if (callback.call(context, this[i], i, this))
+            arr.push(this[i]);
+    }
+    return arr;
+};
+var newNum = numbers3.filter1(function(n) {
+    return n >= 10;
+});
+console.log("filter result of >=10 :"+newNum);
+//every
+Array.prototype.every1 = function(callback) {
+    for (var i = 0; i < this.length; i++) {
+        if (!callback( this[i]))
+            return false;
+    }
+    return true;
+};
+var passed = numbers3.every1(function(element) {
+    return (element >= 10);
+});
+console.log("every result of >= 10 : "+passed);
+passed = numbers3.every1(function(element) {
+    return (element >= 2);
+});
+console.log("every result of >= 2 : "+passed);
+//some
+Array.prototype.some1 = function(callback) {
+    for (var i = 0; i < this.length; i++) {
+        if (callback(this[i]))
+            return true;
+    }
+    return false;
+};
+var passed = numbers3.some1(function(element) {
+    return (element >= 20);
+});
+console.log("some result of >= 20 : "+passed);
+var passed = numbers3.some1(function(element) {
+    return (element >= 40);
+});
+console.log("some result of >= 40 : "+passed);
+// //isArray
+// Array.prototype.isArray1 = function (obj){
+//     return (obj instanceof Array);
+// }
+// console.log("isArray result :"+ Array.isArray(numbers3))
+
+
+    //foreach
+Array.prototype.foreach1 = function(callback) {
+    for (var i = 0; i < this.length; i++)
+        callback(this[i]);
+};
+
+var arr = [];
+var total = numbers3.foreach1(function(a) {
+ arr.push(a);
+});
+console.log("foreach result : "+arr);
+
+//reduce
+    Array.prototype.reduce1 = function(callback, initialVal) {
+    var accumulator = (initialVal == undefined) ? undefined : initialVal;
+    for (var i = 0; i < this.length; i++) {
+        if (accumulator != undefined)
+            accumulator = callback(accumulator,this[i]);
+        else
+            accumulator = this[i];
+    }
+    return accumulator;
+};
+//     Array.prototype.reduce2 = function(callback, initialVal) {
+//     // var accumulator = (initialVal == undefined) ? undefined : initialVal;
+//     var accumulator;
+//     if(initialVal == undefined){
+//         accumulator = undefined;
+//     }
+//     else{
+//         accumulator = initialVal;
+//     }
+//     for (var i = 0; i < this.length; i++) {
+//         if (accumulator != undefined)
+//             accumulator = callback(accumulator,this[i]);
+//         else
+//             accumulator = this[i];
+//     }
+//     return accumulator;
+// };
+// var numbers3 = [20, 20, 2, 3];
+var total = numbers3.reduce1(function(a, b) {
+    return a + b;
+}, 10);
+console.log("reduce result a+b to initial number 10: "+total);
+var total1 = numbers3.reduce1(function(a, b) {
+    return a + b;
+});
+console.log("reduce result a+b: "+total1);
+
+    </script>
+</head>
+
+<body >
+<h1>HIGHER ORDER FUNCTIONS</h1>
+
+</body>
+   
+
+</html>
